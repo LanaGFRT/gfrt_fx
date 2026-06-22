@@ -1,4 +1,25 @@
 import streamlit as st
+# — LOGIN ———————————————————————————————————————
+
+def check_password():
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+    if st.session_state.authenticated:
+        return True
+    st.title("🔒 GFRT · FX Exposure")
+    pwd = st.text_input("Senha de acesso:", type="password")
+    if st.button("Entrar"):
+        if pwd == "gfrt2025":
+            st.session_state.authenticated = True
+            st.rerun()
+        else:
+            st.error("Senha incorreta.")
+    return False
+
+if not check_password():
+    st.stop()
+
+# ——————————————————————————————————————————————————
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
